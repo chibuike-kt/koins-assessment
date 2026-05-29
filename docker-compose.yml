@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: koins-postgres
+    environment:
+      POSTGRES_USER: koins
+      POSTGRES_PASSWORD: koins1234
+      POSTGRES_DB: koins_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - koins_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U koins -d koins_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: koins-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/koins_db
+      SPRING_DATASOURCE_USERNAME: koins
+      SPRING_DATASOURCE_PASSWORD: koins1234
+      JWT_SECRET: koins-super-secret-jwt-key-that-is-long-enough-for-hs256-algorithm
+      PAYSTACK_SECRET_KEY: sk_test_placeholder
+      MAIL_USERNAME: placeholder@gmail.com
+      MAIL_PASSWORD: placeholder
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  koins_pgdata:

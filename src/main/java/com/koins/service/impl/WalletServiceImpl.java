@@ -1,5 +1,11 @@
 package com.koins.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.koins.dto.request.FundWalletRequest;
 import com.koins.dto.response.PaystackInitResponse;
 import com.koins.dto.response.TransactionResponse;
@@ -18,13 +24,9 @@ import com.koins.repository.WalletRepository;
 import com.koins.service.PaystackService;
 import com.koins.service.WalletService;
 import com.koins.util.ReferenceUtil;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -97,7 +99,7 @@ public class WalletServiceImpl implements WalletService {
         return WalletResponse.builder()
                 .id(wallet.getId())
                 .userId(wallet.getUser().getId())
-                .balance(wallet.getBalance())
+                .balanceKobo(wallet.getBalance())
                 .currency(wallet.getCurrency())
                 .status(wallet.getStatus())
                 .createdAt(wallet.getCreatedAt())

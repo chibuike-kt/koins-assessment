@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 public class FundWalletRequest {
 
     @NotNull(message = "Amount is required")
-    @DecimalMin(value = "100.00", message = "Minimum funding amount is NGN 100")
+    @DecimalMin(value = "10000", message = "Minimum funding amount is 10000 kobo (NGN 100)")
     private BigDecimal amount;
 
     private String email;

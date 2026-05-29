@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class LoanRequest {
 
     @NotNull(message = "Loan amount is required")
-    @DecimalMin(value = "1000.00", message = "Minimum loan amount is NGN 1,000")
+    @DecimalMin(value = "100000", message = "Minimum loan amount is 100000 kobo (NGN 1,000)")
     private BigDecimal loanAmount;
 
     @NotNull(message = "Loan duration is required")

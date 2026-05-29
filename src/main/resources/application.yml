@@ -1,0 +1,43 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: koins-assessment
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/koins_db
+    username: koins
+    password: koins1234
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:koins-super-secret-jwt-key-that-is-long-enough-for-hs256-algorithm}
+    expiration: 86400000
+  paystack:
+    secret-key: ${PAYSTACK_SECRET_KEY:sk_test_placeholder}
+    base-url: https://api.paystack.co
+  otp:
+    expiration-minutes: 10
